@@ -40,22 +40,7 @@ html = f"""<!DOCTYPE html>
         <blockquote>""</blockquote>
         <cite>— </cite>
     </div>
-    <div class="card">
-        <blockquote>""</blockquote>
-        <cite>— </cite>
-    </div>
-    <div class="card">
-        <blockquote>""</blockquote>
-        <cite>— </cite>
-    </div>
-    <div class="card">
-        <blockquote>""</blockquote>
-        <cite>— </cite>
-    </div>
-    <div class="card">
-        <blockquote>""</blockquote>
-        <cite>— </cite>
-    </div>
+    
 </body>
 </html>"""
 
