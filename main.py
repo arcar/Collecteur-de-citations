@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 2: Génération du HTML
 html = f"""<!DOCTYPE html>
 <html lang="fr">
@@ -48,3 +49,12 @@ html = f"""<!DOCTYPE html>
 fichier = "index.html"
 with open(fichier, "w", encoding="utf-8") as f:
     f.write(html)
+=======
+import requests 
+
+message = requests.get("http://api.quotable.io/random")
+data = message.json()
+
+citation = data ["content"]
+auteur = data ["author"]
+>>>>>>> request
