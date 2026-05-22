@@ -31,7 +31,7 @@ html = f"""<!DOCTYPE html>
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             text-align: center;
         }}
-        blockquote {{
+        auteur {{
             font-size: 1.4em;
             color: #333;
             font-style: italic;
@@ -46,8 +46,8 @@ html = f"""<!DOCTYPE html>
 </head>
 <body>
     <div class="card">
-        <blockquote>""</blockquote>
-        <cite>— </cite>
+        <blockquote>"{citation}"</blockquote>
+        <cite>— {auteur}</cite>
     </div>
     
 </body>
