@@ -1,10 +1,12 @@
 import requests 
 
-message = requests.get("http://api.quotable.io/random")
-data = message.json()
 
-citation = data ["content"]
-auteur = data ["author"]
+citations = []
+
+for i in range (5):
+    message = requests.get("http://api.quotable.io/random")
+    data = message.json()
+    citations.append({"content":data["content"],"author": data["author"]})
 
 
 html = f"""<!DOCTYPE html>
