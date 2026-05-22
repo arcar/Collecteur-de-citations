@@ -7,12 +7,11 @@ citation = data ["content"]
 auteur = data ["author"]
 
 
-# 2: Génération du HTML
 html = f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Citation du jour</title>
+    <title>Citations du jour</title>
     <style>
         body {{
             font-family: Georgia, serif;
@@ -44,11 +43,13 @@ html = f"""<!DOCTYPE html>
         }}
     </style>
 </head>
-<body>
-    <div class="card">
-        <blockquote>"{citation}"</blockquote>
-        <cite>— {auteur}</cite>
+<body>"""
+for citation in citations:
+    html+=f"""<div class="card">
+    <blockquote>{citation['content']}</blockquote>
+    <cite>—{citation['author']} </cite>
     </div>
+     
     
 </body>
 </html>"""
@@ -57,4 +58,3 @@ html = f"""<!DOCTYPE html>
 fichier = "index.html"
 with open(fichier, "w", encoding="utf-8") as f:
     f.write(html)
-
