@@ -9,52 +9,131 @@ for i in range (5):
     citations.append({"content":data["content"],"author": data["author"]})
 
 
-html = f"""<!DOCTYPE html>
+slides_html = ""
+
+for quote in citations:
+    content = quote['content']
+    author = quote['author']
+
+    slides_html += f"""
+    <div class="slide">
+        <p class="quote">“{content}”</p>
+        <p class="author">— {author}</p>
+    </div>
+    """
+
+html = f"""
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Citations du jour</title>
-    <style>
-        body {{
-            font-family: Georgia, serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #f0f4f8;
-        }}
-        .card {{
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 600px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            text-align: center;
-        }}
-        auteur {{
-            font-size: 1.4em;
-            color: #333;
-            font-style: italic;
-            margin: 0 0 20px 0;
-            line-height: 1.6;
-        }}
-        cite {{
-            font-size: 1em;
-            color: #888;
-        }}
-    </style>
+<meta charset="UTF-8">
+<title>Carrousel de citations</title>
+
+<style>
+body {{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    font-family: Arial, sans-serif;
+}}
+
+.carousel {{
+    width: 70%;
+    max-width: 800px;
+    overflow: hidden;
+    position: relative;
+}}
+
+.slides {{
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}}
+
+.slide {{
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 40px;
+    color: white;
+    text-align: center;
+}}
+
+.quote {{
+    font-size: 2em;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}}
+
+.author {{
+    font-size: 1.2em;
+    opacity: 0.8;
+}}
+
+button {{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+}}
+
+.prev {{
+    left: 10px;
+}}
+
+.next {{
+    right: 10px;
+}}
+</style>
 </head>
-<body>"""
-for citation in citations:
-    html+=f"""<div class="card">
-    <blockquote>{citation['content']}</blockquote>
-    <cite>—{citation['author']} </cite>
+
+<body>
+
+<div class="carousel">
+    <div class="slides">
+        {slides_html}
     </div>
-     
-    
+
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+</div>
+
+<script>
+const slides = document.querySelector('.slides');
+const slideElements = document.querySelectorAll('.slide');
+
+let index = 0;
+
+function showSlide(i) {{
+    index = (i + slideElements.length) % slideElements.length;
+    slides.style.transform = `translateX(${{-index * 100}}%)`;
+}}
+
+document.querySelector('.next').addEventListener('click', () => {{
+    showSlide(index + 1);
+}});
+
+document.querySelector('.prev').addEventListener('click', () => {{
+    showSlide(index - 1);
+}});
+
+// Rotation automatique
+setInterval(() => {{
+    showSlide(index + 1);
+}}, 4000);
+</script>
+
 </body>
-</html>"""
+</html>
+"""
+
 
 # 3: Écriture du fichier HTML
 fichier = "index.html"
